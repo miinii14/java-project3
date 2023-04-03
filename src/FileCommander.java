@@ -39,4 +39,15 @@ public class FileCommander {
         }
     }
 
+    public List<String> find(String substring){
+        try {
+            return Files.walk(this.path)
+                    .filter(o -> o.getFileName().toString().contains(substring))
+                    .map(Path::toString)
+                    .collect(Collectors.toList());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
